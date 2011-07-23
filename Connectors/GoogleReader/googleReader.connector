@@ -1,0 +1,11 @@
+{
+	"title":"Google Reader",
+	"action":"Connect to Google Reader",
+	"desc":"Collect and sync my shared items, starred items, notes, tags, and subscriptions from Google Reader",
+	"run":"node init.js",
+	"status":"unstable",
+	"handle":"googlereader",
+	"mongoCollections": ["starred", "shared", "notes", "subscriptions", "tags"],
+	"processOptions" : {"enableCookies" : true, "id" : "id"},
+	"provides":["link/googlereader", "tag/googlereader"]
+}
