@@ -14,6 +14,20 @@ function reload(offset, limit, useJSON) {
     var useJSON = useJSON || false;
 
     var getPhotosCB = function(photos) {
+    photos = photos.sort(function(lh, rh) {
+        var rhc = parseInt(rh.timestamp);
+        var lhc = parseInt(lh.timestamp);
+        console.log(rhc);
+        console.log(lhc);
+        if (isNaN(rhc) || isNaN(lhc)) {
+            console.dir(rh);
+            console.dir(lh);
+        }
+        if (rhc > (Date.now() / 1000)) rhc = rhc / 1000;
+        if (lhc > (Date.now() / 1000)) lhc = lhc / 1000;
+        return rhc - lhc;
+    });
+    console.log(photos);
 	// find the unordered list in our document to append to
         var photosList = $("#main ul");
 
@@ -33,7 +47,7 @@ function reload(offset, limit, useJSON) {
 		// get the photo name, but use the first email address if no name exists
 		photoHTML = photo.name || photo.emails[0].value;
 	    }
-	    liHTML = '<li id="' + photo._id + '" class="photo"><span class="basic-data">'+photoHTML+'</span></div>';
+	    liHTML = '<li id="' + photo._id + '" class="photo"><img src="/Me/photos/fullPhoto/' + photo.id+ '" style="max-width:300px" /><span class="basic-data">'+photoHTML+'</span></div>';
 	    photosList.append(liHTML);
 	}
     };
